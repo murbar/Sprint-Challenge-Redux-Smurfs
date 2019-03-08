@@ -22,7 +22,13 @@
   Components can then read your store as, `state` and not `state.fooReducer`.
 */
 
-import { REQUEST_START, REQUEST_FAILURE, GET_SUCCESS, ADD_SUCCESS } from '../actions';
+import {
+  REQUEST_START,
+  REQUEST_FAILURE,
+  GET_SUCCESS,
+  ADD_SUCCESS,
+  DELETE_SUCCESS
+} from '../actions';
 
 const initialState = {
   smurfs: [],
@@ -51,12 +57,18 @@ export default (state = initialState, action) => {
         smurfs: action.smurfs
       };
     case ADD_SUCCESS:
-      const newData = [...state.smurfs, action.smurf];
       return {
         ...state,
         busy: false,
         error: null,
-        smurfs: newData
+        smurfs: action.smurfs
+      };
+    case DELETE_SUCCESS:
+      return {
+        ...state,
+        busy: false,
+        error: null,
+        smurfs: action.smurfs
       };
     default:
       return state;

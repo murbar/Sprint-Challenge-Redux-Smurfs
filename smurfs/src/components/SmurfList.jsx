@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { deleteSmurf } from '../actions';
 
 import Smurf from './Smurf';
 
-const SmurfList = ({ smurfs }) => {
+const SmurfList = ({ smurfs, deleteSmurf }) => {
+  const handleDelete = smurfId => {
+    deleteSmurf(smurfId);
+  };
+
   return (
     <div className="Smurfs">
       <h2>Smurfs Directory</h2>
       {smurfs.map(smurf => {
-        return (
-          <Smurf
-            name={smurf.name}
-            id={smurf.id}
-            age={smurf.age}
-            height={smurf.height}
-            // onDelete={onDelete}
-            key={smurf.id}
-          />
-        );
+        return <Smurf attrs={smurf} onDelete={handleDelete} key={smurf.id || 0} />;
       })}
     </div>
   );
 };
 
-export default SmurfList;
+export default connect(
+  null,
+  { deleteSmurf }
+)(SmurfList);

@@ -21,6 +21,7 @@ export const REQUEST_START = 'REQUEST_START';
 export const REQUEST_FAILURE = 'REQUEST_FAILURE';
 export const GET_SUCCESS = 'GET_SUCCESS';
 export const ADD_SUCCESS = 'ADD_SUCCESS';
+export const DELETE_SUCCESS = 'DELETE_SUCCESS';
 
 export const getSmurfs = () => dispatch => {
   dispatch({ type: REQUEST_START });
@@ -39,7 +40,21 @@ export const addSmurf = smurf => dispatch => {
   axios
     .post(endpoint, smurf)
     .then(({ data }) => {
-      dispatch({ type: ADD_SUCCESS, smurf: data });
+      dispatch({ type: ADD_SUCCESS, smurfs: data });
+    })
+    .catch(err => {
+      const msg = err.response.data.Error;
+      dispatch({ type: REQUEST_FAILURE, error: msg });
+    });
+};
+
+export const deleteSmurf = smurfId => dispatch => {
+  dispatch({ type: REQUEST_START });
+  axios
+    .delete(`${endpoint}/${smurfId}`)
+    .then(({ data }) => {
+      console.log(data);
+      dispatch({ type: DELETE_SUCCESS, smurfs: data });
     })
     .catch(err => {
       const msg = err.response.data.Error;
