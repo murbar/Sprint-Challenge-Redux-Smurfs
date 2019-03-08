@@ -19,7 +19,8 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Smurf Village</h1>
-        {busy && <div>Loading...</div>}
+        {busy && <div className="loading">Loading...</div>}
+        {error && <div className="error">{error}</div>}
         <SmurfForm />
         <SmurfList smurfs={smurfs} />
       </div>
