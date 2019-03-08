@@ -5,6 +5,7 @@ import Smurf from './Smurf';
 const SmurfList = ({ smurfs }) => {
   return (
     <div className="Smurfs">
+      <h2>Smurfs Directory</h2>
       {smurfs.map(smurf => {
         return (
           <Smurf
