@@ -22,7 +22,7 @@ export const GET_SUCCESS = 'GET_SUCCESS';
 export const GET_FAILURE = 'GET_FAILURE';
 export const BUSY = 'BUSY';
 
-const getSmurfs = () => dispatch => {
+export const getSmurfs = () => dispatch => {
   dispatch({ type: BUSY, status: 'Fetching smurfs' });
   axios
     .get(endpoint)
