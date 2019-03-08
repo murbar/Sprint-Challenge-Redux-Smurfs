@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getSmurfs } from '../actions';
 import SmurfList from './SmurfList';
 import './App.css';
+import SmurfForm from './SmurfForm';
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -19,6 +20,7 @@ class App extends Component {
       <div className="App">
         <h1>Smurf Village</h1>
         {busy && <div>Loading...</div>}
+        <SmurfForm />
         <SmurfList smurfs={smurfs} />
       </div>
     );
