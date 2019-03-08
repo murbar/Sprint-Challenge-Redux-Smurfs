@@ -17,27 +17,25 @@ import axios from 'axios';
 
 const endpoint = 'http://localhost:3333/smurfs';
 
-export const BUSY = 'BUSY';
+export const REQUEST_START = 'REQUEST_START';
+export const REQUEST_FAILURE = 'REQUEST_FAILURE';
 export const GET_SUCCESS = 'GET_SUCCESS';
-export const GET_FAILURE = 'GET_FAILURE';
 export const ADD_SUCCESS = 'ADD_SUCCESS';
-export const ADD_FAILURE = 'ADD_FAILURE';
 
 export const getSmurfs = () => dispatch => {
-  dispatch({ type: BUSY });
+  dispatch({ type: REQUEST_START });
   axios
     .get(endpoint)
     .then(({ data }) => {
       dispatch({ type: GET_SUCCESS, smurfs: data });
     })
     .catch(err => {
-      dispatch({ type: GET_FAILURE, error: err });
-      console.log(err);
+      dispatch({ type: REQUEST_FAILURE, error: err });
     });
 };
 
 export const addSmurf = smurf => dispatch => {
-  dispatch({ type: BUSY });
+  dispatch({ type: REQUEST_START });
   axios
     .post(endpoint, smurf)
     .then(({ data }) => {
@@ -45,6 +43,6 @@ export const addSmurf = smurf => dispatch => {
     })
     .catch(err => {
       const msg = err.response.data.Error;
-      dispatch({ type: ADD_FAILURE, error: msg });
+      dispatch({ type: REQUEST_FAILURE, error: msg });
     });
 };
