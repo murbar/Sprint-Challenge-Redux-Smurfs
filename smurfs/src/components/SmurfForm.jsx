@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { addSmurf } from '../actions';
 
-const SmurfForm = props => {
+const SmurfForm = ({ addSmurf }) => {
   const [values, setValues] = useState({});
 
   const handleSubmit = e => {
@@ -38,4 +39,7 @@ const SmurfForm = props => {
   );
 };
 
-export default SmurfForm;
+export default connect(
+  null,
+  { addSmurf }
+)(SmurfForm);
